@@ -17,6 +17,8 @@ class Building{
 
 class Antenna{
     public:
+        int Ax;
+        int Ay;
         int Ar;
         int Ac;
         Antenna(int r, int c){
