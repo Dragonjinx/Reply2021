@@ -35,29 +35,29 @@ class Antenna{
         }
 };
 
-int dist(Antenna a, Building b){
-    int x = abs(a.Ax - b.Bx);
-    int y = abs(a.Ay - b.By);
+int dist(Antenna* a, Building* b){
+    int x = abs(a->Ax - b->Bx);
+    int y = abs(a->Ay - b->By);
     return x+y;
 }
 
-vector<int> r(Building b, vector<Antenna> ant){
+vector<int> r(Building* b, vector<Antenna *> ant){
     vector<int> res;
     for(int i = 0; i < ant.size(); i++){
-        if(dist(ant[i], b) <= ant[i].Ar){
+        if(dist(ant[i], b) <= ant[i]->Ar){
             res.push_back(i);
         }
     }
     return res;
 }
 
-int s(Antenna a, Building b){
-    return (b.Bc * a.Ac) - (b.Bl*dist(a, b));
+int s(Antenna * a, Building * b){
+    return (b->Bc * a->Ac) - (b->Bl*dist(a, b));
 }
 
-Antenna c(Building b, vector<Antenna> ant){
+Antenna * c(Building * b, vector<Antenna *> ant){
     int resS = 0;
-    Antenna resA = ant[0];
+    Antenna * resA = ant[0];
     for(int i = 0; i < ant.size(); i++){
         if(s(ant[i], b) > resS){
             resA = ant[i];
@@ -66,12 +66,12 @@ Antenna c(Building b, vector<Antenna> ant){
     return resA;
 }
 
-int sBuild(Building b, vector<Antenna> ant){
+int sBuild(Building * b, vector<Antenna* > ant){
     return s(c(b, ant), b);
     // If no antennas are reachable (r(b) = ∅) then s(b) = 0.
 }
 
-int reward(vector<Building> bui, vector<Antenna> ant, int R){
+int reward(vector<Building*> bui, vector<Antenna*> ant, int R){
     for(int i = 0; i < bui.size(); i++){
         vector<int> r0 = r(bui[i], ant);
         if(r0.size() == 0){
@@ -81,7 +81,7 @@ int reward(vector<Building> bui, vector<Antenna> ant, int R){
     return R;
 }
 
-int score(vector<Building> bui, vector<Antenna> ant, int R){
+int score(vector<Building*> bui, vector<Antenna*> ant, int R){
     int res = 0;
     for(int i = 0; i < bui.size(); i++){
         res += sBuild(bui[i], ant);

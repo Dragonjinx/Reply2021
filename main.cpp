@@ -35,7 +35,6 @@ void parse_antenna(int &number, std::vector<Antenna*> &Antennas, std::ifstream &
 
 int main(int Argc, char * Argv[])
 {
-
     std::ifstream input_txt;
     std::cout << Argv[1] << "\n";
     input_txt.open(Argv[1]);
@@ -55,5 +54,7 @@ int main(int Argc, char * Argv[])
     {
         Buildings[i]->print();
     }
+
+    input_txt.close();
     return 0;
 }
