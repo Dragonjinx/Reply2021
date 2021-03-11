@@ -17,8 +17,8 @@ class Building{
 
 class Antenna{
     public:
-        int Ax;
-        int Ay;
+        int Ax = 0;
+        int Ay = 0;
         int Ar;
         int Ac;
         Antenna(int r, int c){
@@ -27,15 +27,35 @@ class Antenna{
         }
 };
 
-int dist(int xa, int ya, int xb, int yb){
-    int x = abs(xa - xb);
-    int y = abs(ya - yb);
+int dist(Antenna a, Building b){
+    int x = abs(a.Ax - b.Bx);
+    int y = abs(a.Ay - b.By);
     return x+y;
 }
 
 vector<int> r(Building b, vector<Antenna> ant){
     vector<int> res;
     for(int i = 0; i < ant.size(); i++){
-        if(dist(b.Bx, b.By, ))
+        if(dist(ant[i], b) <= ant[i].Ar){
+            res.push_back(i);
+        }
     }
+    return res;
+}
+
+int s(Antenna a, Building b){
+    return (b.Bc * a.Ac) - (b.Bl*dist(a, b));
+}
+
+Antenna c(Building b, vector<Antenna> ant){
+    int resS = 0;
+    for(int i = 0; i < ant.size(); i++){
+        resS = max(resS, s(ant[i], b));
+    }
+    return s;
+}
+
+int sBuild(Building b, vector<Antenna> ant){
+    return s(C(b, ant), b);
+    // If no antennas are reachable (r(b) = ∅) then s(b) = 0.
 }
