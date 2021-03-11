@@ -17,13 +17,15 @@ class Building{
 
 class Antenna{
     public:
-        int Ax = 0;
-        int Ay = 0;
+        int Ax;
+        int Ay;
         int Ar;
         int Ac;
         Antenna(int r, int c){
             Ar = r;
             Ac = c;
+            Ax = 0;
+            Ay = 0;
         }
 };
 
