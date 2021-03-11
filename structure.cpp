@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int R;
+
 class Building{
     public:
         int Bx;
@@ -60,4 +62,23 @@ Antenna c(Building b, vector<Antenna> ant){
 int sBuild(Building b, vector<Antenna> ant){
     return s(C(b, ant), b);
     // If no antennas are reachable (r(b) = ∅) then s(b) = 0.
+}
+
+int reward(vector<Building> bui, vector<Antenna> ant){
+    for(int i = 0; i < bui.size(); i++){
+        vector<int> r0 = r(bui[i], ant);
+        if(r0.size() == 0){
+            return 0;
+        }
+    }
+    return R;
+}
+
+int score(vector<Building> bui, vector<Antenna> ant){
+    int res = 0;
+    for(int i = 0; i < bui.size(); i++){
+        res += sBuild(bui[i], ant);
+    }
+    res += reward(bui, ant);
+    return res;
 }
