@@ -15,6 +15,10 @@ class Building{
             Bl = l;
             Bc = c;
         }
+        void print()
+        {
+            cout << Bx << " " << By << " " << Bl << " " << Bc << "\n";
+        }
 };
 
 class Antenna{
